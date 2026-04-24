@@ -1,0 +1,23 @@
+# Build artifacts
+build/
+tmp/
+*.dylib
+*.o
+
+# Compiled test binary — rebuild with clang per README
+tests/test_prompt_builder
+
+# macOS
+.DS_Store
+
+# Editor swapfiles
+*.swp
+*.swo
+*~
+
+# IDE project directories
+.vscode/
+.idea/
+.cache/
+.ccls-cache/
+compile_commands.json
