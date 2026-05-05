@@ -6,7 +6,8 @@ Update in lockstep with implementation.
 ## Scope
 
 Port `notepad-plus-plus-mac/nppPluginsWin64/NppAIAssistant` (upstream by
-Don HO — a 3-provider AI chat panel with scenario-tuned prompt builder
+PingKuei Lin 
+a 3-provider AI chat panel with scenario-tuned prompt builder
 and selection-action context menu) to macOS as a native AppKit plugin
 against host v1.0.4 and the plugin ABI in `NppPluginInterfaceMac.h`.
 

@@ -7,7 +7,7 @@ vLLM, LocalAI, …) without leaving the editor.
 
 Ported from the Windows upstream
 [NppAIAssistant](https://github.com/notepad-plus-plus/NppAIAssistant)
-by Don HO, with macOS-native AppKit UI and full provider-endpoint
+by PingKuei Lin, with macOS-native AppKit UI and full provider-endpoint
 customization.
 
 ## Requirements
@@ -143,5 +143,5 @@ GPL, same as the upstream plugin.
 
 ## Credits
 
-- Upstream plugin: [notepad-plus-plus/NppAIAssistant](https://github.com/notepad-plus-plus/NppAIAssistant) by Don HO
+- Upstream plugin: [notepad-plus-plus/NppAIAssistant](https://github.com/notepad-plus-plus/NppAIAssistant) by PingKuei Lin
 - macOS port: Andrey Letov
