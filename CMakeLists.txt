@@ -68,7 +68,7 @@ set_target_properties(NppAIAssistant PROPERTIES
 
 # Install into the user's plugin folder so a fresh build is immediately
 # picked up by the running host.
-set(PLUGIN_INSTALL_DIR "$ENV{HOME}/.notepad++/plugins/NppAIAssistant")
+set(PLUGIN_INSTALL_DIR "$ENV{HOME}/.nextpad++/plugins/NppAIAssistant")
 install(TARGETS NppAIAssistant DESTINATION "${PLUGIN_INSTALL_DIR}")
 
 # NPPM_ADDTOOLBARICON_FORDARKMODE looks for `<plugin dir>/toolbar.png`

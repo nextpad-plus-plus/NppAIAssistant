@@ -38,8 +38,8 @@ const char* kKeyClaudeDefaultModel  = "claude_default_model";
 
 std::string configDir() {
     const char* home = getenv("HOME");
-    std::string dir = (home ? home : "") + std::string("/.notepad++/plugins/Config");
-    mkdir(dir.c_str(), 0755);  // idempotent; HOME/.notepad++ already exists in practice
+    std::string dir = (home ? home : "") + std::string("/.nextpad++/plugins/Config");
+    mkdir(dir.c_str(), 0755);  // idempotent; HOME/.nextpad++ already exists in practice
     return dir;
 }
 
