@@ -33,6 +33,17 @@ void Editor::setNppData(const NppData& data) {
     g_npp = data;
 }
 
+std::string Editor::pluginConfigDir() {
+    char buf[1024] = {0};
+    nppSend(NPPM_GETPLUGINSCONFIGDIR, (uintptr_t)sizeof(buf), (intptr_t)buf);
+    if (buf[0] != '\0') return std::string(buf);
+    // Fallback only if the host returns empty (it does not on shipped versions):
+    // the macOS app-support base, NOT a legacy ~/.nextpad++ dot-folder.
+    NSString* dir = [NSHomeDirectory()
+        stringByAppendingPathComponent:@"Library/Application Support/Nextpad++/plugins/Config"];
+    return std::string([dir UTF8String]);
+}
+
 std::intptr_t Editor::current() {
     int which = -1;
     nppSend(NPPM_GETCURRENTSCINTILLA, 0, reinterpret_cast<intptr_t>(&which));

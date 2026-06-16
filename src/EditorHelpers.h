@@ -44,6 +44,11 @@ public:
     static void setSelectionRange(std::intptr_t sci,
                                   std::intptr_t start,
                                   std::intptr_t end);
+
+    // The host's plugin config directory (NPPM_GETPLUGINSCONFIGDIR), with an
+    // Application-Support fallback. Used to locate the settings INI — never a
+    // hardcoded ~/.nextpad++ dot-folder.
+    static std::string pluginConfigDir();
 };
 
 }  // namespace NppAIAssistant

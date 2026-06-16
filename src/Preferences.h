@@ -3,7 +3,8 @@
  *
  * Schema is wire-compatible with the Windows upstream: same key names,
  * same integer codings, same 0/1 bool encoding. Stored as INI at
- *   ~/.nextpad++/plugins/Config/NppAIAssistant.ini
+ *   <NPPM_GETPLUGINSCONFIGDIR>/NppAIAssistant.ini
+ *   (e.g. ~/Library/Application Support/Nextpad++/plugins/Config/NppAIAssistant.ini)
  * under the [Settings] section.
  *
  * API-style keys (openai_apikey, gemini_apikey, claude_apikey,

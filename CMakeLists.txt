@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(NppAIAssistant LANGUAGES CXX OBJCXX)
+project(NppAIAssistant VERSION 1.0.2 LANGUAGES CXX OBJCXX)
 
 # Mirror the shared macOS-plugin build target: C++17, hidden visibility,
 # universal arm64+x86_64, deployment target 11.0.
@@ -65,10 +65,12 @@ target_compile_options(NppAIAssistant PRIVATE
 set_target_properties(NppAIAssistant PROPERTIES
     PREFIX ""
     SUFFIX ".dylib")
+# Stamp version into the dylib Mach-O current_version (Plugins Admin reads it).
+target_link_options(NppAIAssistant PRIVATE "-Wl,-current_version,${PROJECT_VERSION}")
 
 # Install into the user's plugin folder so a fresh build is immediately
 # picked up by the running host.
-set(PLUGIN_INSTALL_DIR "$ENV{HOME}/.nextpad++/plugins/NppAIAssistant")
+set(PLUGIN_INSTALL_DIR "$ENV{HOME}/Library/Application Support/Nextpad++/plugins/NppAIAssistant")
 install(TARGETS NppAIAssistant DESTINATION "${PLUGIN_INSTALL_DIR}")
 
 # NPPM_ADDTOOLBARICON_FORDARKMODE looks for `<plugin dir>/toolbar.png`

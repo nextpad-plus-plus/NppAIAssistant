@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 
 #include "Preferences.h"
+#include "EditorHelpers.h"
 
 #include <sys/stat.h>
 #include <cstdlib>
@@ -37,9 +38,10 @@ const char* kKeyGeminiDefaultModel  = "gemini_default_model";
 const char* kKeyClaudeDefaultModel  = "claude_default_model";
 
 std::string configDir() {
-    const char* home = getenv("HOME");
-    std::string dir = (home ? home : "") + std::string("/.nextpad++/plugins/Config");
-    mkdir(dir.c_str(), 0755);  // idempotent; HOME/.nextpad++ already exists in practice
+    // Resolve via the host (NPPM_GETPLUGINSCONFIGDIR) with an Application-Support
+    // fallback — never a hardcoded ~/.nextpad++ dot-folder (PR #211 / issue #67).
+    std::string dir = NppAIAssistant::Editor::pluginConfigDir();
+    mkdir(dir.c_str(), 0755);  // idempotent
     return dir;
 }
 
@@ -144,7 +146,25 @@ bool toBool(const std::string& v, bool fallback) {
 }  // namespace
 
 std::string Preferences::filePath() {
-    return configDir() + "/NppAIAssistant.ini";
+    std::string path = configDir() + "/NppAIAssistant.ini";
+    // One-time migration: copy the INI (API keys + settings) from the legacy
+    // ~/.notepad++ or ~/.nextpad++ plugins/Config location if present and the new
+    // file doesn't exist yet (never clobber).
+    @autoreleasepool {
+        NSFileManager* fm = [NSFileManager defaultManager];
+        NSString* newPath = [NSString stringWithUTF8String:path.c_str()];
+        if (![fm fileExistsAtPath:newPath]) {
+            for (NSString* legacy in @[@".notepad++/plugins/Config/NppAIAssistant.ini",
+                                       @".nextpad++/plugins/Config/NppAIAssistant.ini"]) {
+                NSString* old = [NSHomeDirectory() stringByAppendingPathComponent:legacy];
+                if ([fm fileExistsAtPath:old]) {
+                    [fm copyItemAtPath:old toPath:newPath error:nil];
+                    break;
+                }
+            }
+        }
+    }
+    return path;
 }
 
 Settings Preferences::load() {
